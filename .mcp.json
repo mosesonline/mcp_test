@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "moses-mcp-server": {
+      "type": "http",
+      "url": "http://localhost:8080/mcp",
+      "oauth": {
+        "clientId": "mcp-client",
+        "authorizationUrl": "http://localhost:18080/realms/mcp_realm/protocol/openid-connect/auth",
+        "tokenUrl": "http://localhost:18080/realms/mcp_realm/protocol/openid-connect/token",
+        "scope": "openid mcp:tools"
+      }
+    }
+  }
+}

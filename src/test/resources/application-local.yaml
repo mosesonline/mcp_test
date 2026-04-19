@@ -1,0 +1,17 @@
+spring:
+  elasticsearch:
+    uris: http://localhost:9200
+    password: P_1asssword
+    username: admin
+  docker:
+    compose:
+      enabled: true
+      file: docker-compose.yaml
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:18080/realms/mcp_realm
+          audiences: http://localhost:8080
+
+

@@ -1,0 +1,104 @@
+services:
+  opensearch-node1:
+    labels:
+      org.springframework.boot.ignore: true
+    image: opensearchproject/opensearch:latest
+    container_name: opensearch-node1
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node1
+      - plugins.security.disabled=true
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - bootstrap.memory_lock=true  # along with the memlock settings below, disables swapping
+      - OPENSEARCH_SECURITY_ENABLED=false  # only for testing, disables security features including authentication and TLS
+      - OPENSEARCH_SSL_VERIFICATION_MODE=none  # only for testing, allows OpenSearch Dashboards to connect without certs
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m  # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=P_1asssword    # Sets the demo admin user password when using demo configuration, required for OpenSearch 2.12 and higher
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536  # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    volumes:
+      - opensearch-data1:/usr/share/opensearch/data
+    ports:
+      - 9200:9200
+      - 9600:9600  # required for Performance Analyzer
+    networks:
+      - opensearch-net
+  opensearch-node2:
+    labels:
+      org.springframework.boot.ignore: true
+    image: opensearchproject/opensearch:latest
+    container_name: opensearch-node2
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node2
+      - discovery.seed_hosts=opensearch-node1,opensearch-node2
+      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
+      - bootstrap.memory_lock=true
+      - plugins.security.disabled=true
+      - OPENSEARCH_SECURITY_ENABLED=false  # only for testing, disables security features including authentication and TLS
+      - OPENSEARCH_SSL_VERIFICATION_MODE=none  # only for testing, allows OpenSearch Dashboards to connect without certs
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=P_1asssword
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data2:/usr/share/opensearch/data
+    networks:
+      - opensearch-net
+  opensearch-dashboards:
+    labels:
+      org.springframework.boot.ignore: true
+    image: opensearchproject/opensearch-dashboards:latest
+    container_name: opensearch-dashboards
+    ports:
+      - 5601:5601
+    expose:
+      - '5601'
+    environment:
+      OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]'
+    networks:
+      - opensearch-net
+  database:
+    image: 'postgres:18'
+    ports:
+      - '25432:5432'
+    environment:
+      - 'POSTGRES_USER=admim_user'
+      - 'POSTGRES_DB=keycloak'
+      - 'POSTGRES_PASSWORD=admin_secret'
+  keycloak:
+    image: 'quay.io/keycloak/keycloak:26.6'
+    depends_on:
+      - database
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: 'admin'
+      KC_BOOTSTRAP_ADMIN_PASSWORD: 'admin'
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://database:5432/keycloak
+      KC_DB_USERNAME: admim_user
+      KC_DB_PASSWORD: admin_secret
+    command:
+      - start-dev
+      - --features=token-exchange
+      - --import-realm
+    ports:
+      - '18080:8080'
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
+volumes:
+  opensearch-data1:
+  opensearch-data2:
+
+networks:
+  opensearch-net:
