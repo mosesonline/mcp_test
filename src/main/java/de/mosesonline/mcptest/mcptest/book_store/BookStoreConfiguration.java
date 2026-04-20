@@ -20,8 +20,8 @@ class BookStoreConfiguration {
         this.openSearchClient = openSearchClient;
     }
 
-    @EventListener
-    void onApplicationEvent(ContextRefreshedEvent event) throws IOException {
+    @EventListener(ContextRefreshedEvent.class)
+    void onApplicationEvent() throws IOException {
 
         if (!bookIndexExists()) {
             openSearchClient.indices().create(c -> c.index("books"));
@@ -32,7 +32,7 @@ class BookStoreConfiguration {
         if (count.count() == 0) {
             final var createRequest = new CreateRequest.Builder<Book>().index("books")
                     .id("1")
-                    .document(new Book("The Lord of the Rings", "J.R.R. Tolkien", "978-0395647387", "A fellowship travels around middlearth to throw a ring in a volcano,"))
+                    .document(new Book("The Lord of the Rings", "J.R.R. Tolkien", "978-0395647387", "A fellowship travels around Middle-earth to throw a ring in a volcano,"))
                     .build();
             openSearchClient.create(createRequest);
         }

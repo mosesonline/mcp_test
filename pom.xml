@@ -28,11 +28,19 @@
     </scm>
     <properties>
         <java.version>26</java.version>
+        <spring-framework.version>7.0.7</spring-framework.version>
         <spring-ai.version>2.0.0-M4</spring-ai.version>
         <jackson-bom.version>3.1.2</jackson-bom.version>
+        <tomcat.version>11.0.21</tomcat.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springaicommunity</groupId>
+            <artifactId>mcp-server-security-spring-boot</artifactId>
+            <version>0.1.8</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -96,6 +104,13 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>io.modelcontextprotocol.sdk</groupId>
+                <artifactId>mcp-bom</artifactId>
+                <version>1.1.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.ai</groupId>
                 <artifactId>spring-ai-bom</artifactId>
                 <version>${spring-ai.version}</version>
@@ -119,5 +134,25 @@
             </plugin>
         </plugins>
     </build>
-
+    <profiles>
+        <profile>
+            <id>aot-build</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>process-aot</id>
+                                <goals>
+                                    <goal>process-aot</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
