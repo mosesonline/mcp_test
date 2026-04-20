@@ -79,9 +79,22 @@ ISBN:   978-0395647387
 ```shell
 # start database, Keycloak, OpenSearch with docker-compose
 docker-compose up -d
-# start application with local profile (loads Keycloak and OpenSearch URIs from application-local.yaml)
+# starts application with local profile (loads Keycloak and OpenSearch URIs from application-local.yaml), 
+# it would also start the docker containers but it can happen, that they are not ready when the application is up and then it would fail to connect and stop.
 ./mvnw spring-boot:test-run
+http://localhost:18080/realms/mcp_realm/protocol/openid-connect/auth?response_type=code&client_id=mcp-client&code_challenge=g99HhHGL8qOPK0s5mOTO5zA6oOQt8OrEH2vokHUP9CI&code_challenge_method=S256&redirect_uri=http%3A%2F%2Flocalhost%3A63406%2Fcallback&state=QvV8K5Z7jjTnFW6ko-mBq_TY_QK-K1oP5-4LTW7Ktdg&scope=openid+mcp%3Atools+offline_access&resource=http%3A%2F%2Flocalhost%3A8080%2F
 ```
+
+### Connect with mcp
+
+1. Ensure docker services and service is running
+2. Open your AI agent (e.g. Claude Code)
+3. Configure the MCP server connection (`/mcp` should list the "moses-mcp-server" server)
+4. Select server
+5. Select (Re-)Connect
+6. Select server, again (server state should be "needs authentication")
+7. Select Authenticate (this should open the Keycloak login page in your browser, or copy the provided link if it doesn't open automatically, but make sure you delete spaces or other shell characters if you copy it manually)
+8. Login with the user (see Keycloak section below)
 
 ## Sample prompts
 
