@@ -48,9 +48,12 @@ class SecurityConfiguration {
                 )
                 .with(
                         McpServerOAuth2Configurer.mcpServerOAuth2(),
-                        (mcpAuthorization) -> mcpAuthorization.authorizationServer(issuerUrl)
-                                .protectedResourceMetadataCustomizer(metadata -> metadata.scope("mcp:tools")
-                                        .authorizationServer(issuerUrl)));
+                        (mcpAuthorization) -> {
+                            mcpAuthorization.authorizationServer(issuerUrl)
+                                    .protectedResourceMetadataCustomizer(metadata -> metadata.scope("mcp:tools")
+                                            .authorizationServer(issuerUrl));
+                            mcpAuthorization.validateAudienceClaim(true);
+                        });
         return http.build();
     }
 }
