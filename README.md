@@ -6,13 +6,13 @@ This repo demonstrates a **Model Context Protocol (MCP) server** built with Spri
 
 ### Tech stack
 
-| Component | Version | Role |
-|---|---|---|
-| Spring Boot | 4.0.5 | Application framework |
-| Spring AI | 2.0.0-M4 | MCP server support (`spring-ai-starter-mcp-server-webmvc`) |
-| Keycloak | 26.6 | OAuth2 authorization server (JWT issuer) |
-| OpenSearch | latest | Full-text search index for the book store |
-| Java | 26 | Runtime (virtual threads enabled) |
+| Component | Version  | Role |
+|---|----------|---|
+| Spring Boot | 4.0.6    | Application framework |
+| Spring AI | 2.0.0-M5 | MCP server support (`spring-ai-starter-mcp-server-webmvc`) |
+| Keycloak | 26.6     | OAuth2 authorization server (JWT issuer) |
+| OpenSearch | latest   | Full-text search index for the book store |
+| Java | 26       | Runtime (virtual threads enabled) |
 
 ### Architecture
 
