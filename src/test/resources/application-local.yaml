@@ -7,6 +7,8 @@ spring:
     compose:
       enabled: true
       file: docker-compose.yaml
+      skip:
+        in-tests: false
   security:
     oauth2:
       resourceserver:
