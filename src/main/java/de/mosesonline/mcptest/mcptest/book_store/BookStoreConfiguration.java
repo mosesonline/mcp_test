@@ -7,6 +7,7 @@ import org.opensearch.client.opensearch.core.CountResponse;
 import org.opensearch.client.opensearch.core.CreateRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.context.event.EventListener;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ class BookStoreConfiguration {
         this.openSearchClient = openSearchClient;
     }
 
-    @EventListener(ContextRefreshedEvent.class)
+    @EventListener(ContextStartedEvent.class)
     void onApplicationEvent() throws IOException {
 
         if (!bookIndexExists()) {
