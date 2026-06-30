@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.6</version>
+        <version>4.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>de.mosesonline.mcp-test</groupId>
@@ -15,21 +15,21 @@
     <description>mcp-test</description>
     <properties>
         <java.version>26</java.version>
-        <spring-ai.version>2.0.0-M8</spring-ai.version>
-        <jackson-bom.version>3.1.4</jackson-bom.version>
-        <tomcat.version>11.0.22</tomcat.version>
-        <byte-buddy.version>1.18.9</byte-buddy.version>
+        <spring-ai.version>2.0.0</spring-ai.version>
+        <jackson-bom.version>3.2.0</jackson-bom.version>
+        <tomcat.version>11.0.23</tomcat.version>
+        <byte-buddy.version>1.18.10</byte-buddy.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <snakeyaml.version>2.6</snakeyaml.version>
 
         <mockito.version>5.23.0</mockito.version>
-        <junit-jupiter.version>6.1.0</junit-jupiter.version>
-        <mcp-bom.version>2.0.0-M3</mcp-bom.version>
-        <opensearch-java.version>3.8.0</opensearch-java.version>
-        <spring-data-opensearch-starter.version>3.0.5</spring-data-opensearch-starter.version>
+        <junit-jupiter.version>6.1.1</junit-jupiter.version>
+        <mcp-bom.version>2.0.0</mcp-bom.version>
+        <opensearch-java.version>3.9.0</opensearch-java.version>
+        <spring-data-opensearch-starter.version>3.1.0</spring-data-opensearch-starter.version>
         <springdoc-openapi-starter-webmvc-ui.version>3.0.3</springdoc-openapi-starter-webmvc-ui.version>
-        <mcp-server-security-spring-boot.version>0.1.11</mcp-server-security-spring-boot.version>
-        <spring-data-bom.version>2025.1.5</spring-data-bom.version>
+        <mcp-server-security-spring-boot.version>0.1.13</mcp-server-security-spring-boot.version>
+        <spring-data-bom.version>2026.0.0</spring-data-bom.version>
     </properties>
 
     <dependencies>
