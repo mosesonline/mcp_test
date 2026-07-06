@@ -1,7 +1,5 @@
 # MCP Test
 
-[![Build & Test](https://github.com/mosesonline/mcp_test/actions/workflows/build.yaml/badge.svg)](https://github.com/mosesonline/mcp_test/actions/workflows/build.yaml)
-
 ## Description
 
 This repo demonstrates a **Model Context Protocol (MCP) server** built with Spring Boot 4 and Spring AI 2, secured via Keycloak OAuth2. It exposes MCP tools over HTTP (Streamable MCP transport) that an AI agent (e.g. Claude Code) can call to interact with a book store backed by OpenSearch.
