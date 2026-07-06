@@ -18,7 +18,7 @@
         <spring-ai.version>2.0.0</spring-ai.version>
         <jackson-bom.version>3.2.0</jackson-bom.version>
         <tomcat.version>11.0.23</tomcat.version>
-        <byte-buddy.version>1.18.10</byte-buddy.version>
+        <byte-buddy.version>1.18.11</byte-buddy.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <snakeyaml.version>2.6</snakeyaml.version>
 
